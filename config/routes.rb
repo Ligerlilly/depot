@@ -1,5 +1,18 @@
 Depot::Application.routes.draw do
-  resources :line_items
+  devise_for :users
+
+  resources :users, only: :index
+  
+
+
+  resources :orders
+
+
+  resources :line_items do
+    member do
+      post 'decrement'
+    end
+  end
 
 
   resources :carts
@@ -7,8 +20,10 @@ Depot::Application.routes.draw do
 
   get "store/index"
 
-  resources :products
-  
+  resources :products do
+    get :who_bought, on: :member
+  end
+
   root to: 'store#index', as: 'store'
 
 

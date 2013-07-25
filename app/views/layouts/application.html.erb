@@ -11,17 +11,39 @@
 <%= image_tag("logo.png") %>
 <%= @page_title || "Pragmatic Bookshelf" %>
 </div>
+
 <div id="columns">
 <div id="side">
+	
+	<% if @cart %>
+	<%= hidden_div_if(@cart.line_items.empty?, id: 'cart') do %>
+	<%= render @cart %>
+	<% end %>
+	<% end %>
+	
+
 <ul>
 <li><a href="http://localhost:3000">Home</a></li>
 <li><a href="http://localhost:3000/faq">Questions</a></li>
 <li><a href="http://localhost:3000/news">News</a></li>
 <li><a href="http://localhost:3000/contact">Contact<a></li>
+	<br />
+<% if user_signed_in? %>
+	   <%= button_to 'Logout', destroy_user_session_path, method: :delete %>
+	<% end %>
+	
 </ul>
 </div>
 <div id="main">
+	
+	<% if notice %>
+<p class="notice"><%= notice %></p>
+    <% elsif alert %>
+<p class="alert"><%= alert %></p>
+<% end %>
+
 <%= yield %>
+<%= debug(params) if Rails.env.development? %>
 </div>
 </div>
 </body>
