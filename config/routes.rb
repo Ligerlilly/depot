@@ -16,7 +16,7 @@ Depot::Application.routes.draw do
 
 
   resources :carts
-
+  
 
   get "store/index"
 
@@ -25,8 +25,7 @@ Depot::Application.routes.draw do
   end
 
   root to: 'store#index', as: 'store'
-
-
+  get '/faq', to: 'static_pages#faq'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

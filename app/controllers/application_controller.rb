@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
- before_filter :authenticate_user!
+ before_filter :authenticate_user!, except: [:faq]
   protect_from_forgery
   
   def current_cart 
